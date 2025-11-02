@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+<h2>پست ها</h2>
+{% for post in post_page_obj %}
+  <div>
+    <h3>{{ post.title }}</h3>
+    {% if post.short_description %}
+    <p>{{ post.short_description }}</p>
+    {% endif %}
+  </div>
+{% empty %}
+  <p>پستی پیدا نشد</p>
+{% endfor %}
+
+{% if post_page_obj.has_other_pages %}
+  <div>
+    {% if post_page_obj.has_previous %}
+      <a href="?query={{ query }}&post_page={{ post_page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+    Page {{ post_page_obj.number }} of {{ post_page_obj.paginator.num_pages }}
+    {% if post_page_obj.has_next %}
+      <a href="?query={{ query }}&post_page={{ post_page_obj.next_page_number }}">Next</a>
+    {% endif %}
+  </div>
+{% endif %}
+
+<h2>کاربران</h2>
+{% for user in user_page_obj %}
+  <div>
+    <p>{{ user.username }} - {{ user.first_name }} {{ user.last_name }}</p>
+  </div>
+{% empty %}
+  <p>کاربری پیدا نشد</p>
+{% endfor %}
+
+{% if user_page_obj.has_other_pages %}
+  <div>
+    {% if user_page_obj.has_previous %}
+      <a href="?query={{ query }}&user_page={{ user_page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+    Page {{ user_page_obj.number }} of {{ user_page_obj.paginator.num_pages }}
+    {% if user_page_obj.has_next %}
+      <a href="?query={{ query }}&user_page={{ user_page_obj.next_page_number }}">Next</a>
+    {% endif %}
+  </div>
+{% endif %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}
+ثبت نام
+{% endblock title %}
+{% block meta %}
+{% endblock meta %}
+{% block styles %}
+{% endblock styles %}
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">ثبت نام</button>
+</form>
+{% endblock content %}

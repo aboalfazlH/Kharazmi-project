@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ account }}
+{% endblock title %}
+
+{% block content %}
+    پروفایل {{ account }}
+    {% if posts %}
+        
+        {% for post in posts %}
+            <p>{{ post }}</p>
+        {% endfor %}
+            
+    {% endif %}
+        
+{% endblock content %}

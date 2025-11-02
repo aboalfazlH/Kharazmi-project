@@ -1,0 +1,29 @@
+<header>
+    <nav class="navbar">
+        <div class="">
+            <ul class="">
+                <li><a class="" href="{% url 'home-page' %}">صفحه اصلی</a></li>
+                <li><a class="" href="{% url 'blog-page' %}">بلاگ</a></li>
+                <form method="GET" action="{% url 'global-search' %}">
+                    <input type="text" name="query" placeholder="جستجو...">
+                    <button type="submit">جستجو</button>
+                </form>
+
+                {% if user.is_authenticated %}
+                <li><a class="" href="{% url 'my-profile' %}">{{ user }}</a></li>
+
+                {% if user.is_staff %}
+                <li><a class="" href="{% url 'admin:index' %}">داشبورد</a></li>
+                {% endif %}
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button class="" type="submit">خروج</button>
+                </form>
+                {% else %}
+                <li><a href="{% url 'signup' %}">ثبت نام</a></li>
+                <li><a href="{% url 'login' %}">ورود</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</header>
