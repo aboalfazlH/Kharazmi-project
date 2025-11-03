@@ -71,5 +71,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## Acknowledgments
 
 - Built with Django
-- Inspired by popular URL shortening services
 - Special thanks to all contributors
