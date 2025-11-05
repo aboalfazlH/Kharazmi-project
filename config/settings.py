@@ -18,7 +18,6 @@ ALLOWED_HOSTS =  getenv("ALLOWED_HOSTS", "").split(",")
 DJANGO_APPS = [
     "admin_interface", 
     "colorfield",
-    # The Django Admin Interface app is a third-party app, but it must be installed before other apps.
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,7 +35,8 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "apps.core",
     "apps.users",
-    "apps.blog"
+    "apps.blog",
+    "apps.qa"
 ]
 
 
