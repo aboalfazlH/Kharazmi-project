@@ -42,7 +42,7 @@ pip install -r requirements.txt
 4. **Configure the application**
    - Create `.env`
    - Copy `.env.example` to `.env`
-   - Update the configuration with your settings (database URI, secret key, etc.)
+   - Update the configuration with your settings (debug, secret key,allowed hosts, etc.)
 
 5. **Initialize the database**
 ```bash
