@@ -57,11 +57,6 @@ python manage.py runserver
 
 The application will be available at `http://127.0.0.1:8000`
 
-## Admin Features
-
-- View all users and their links
-- Monitor system statistics
-
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
