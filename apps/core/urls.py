@@ -4,5 +4,5 @@ from .views import HomePageView,GlobalSearchView
 
 urlpatterns = [
     path('',HomePageView.as_view(),name="home-page"),
-        path('search/', GlobalSearchView.as_view(), name='global-search'),
+    path('search/', GlobalSearchView.as_view(), name='global-search'),
 ]
