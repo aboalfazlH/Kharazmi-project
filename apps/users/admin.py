@@ -52,10 +52,5 @@ class CustomUserAdmin(UserAdmin, SummernoteModelAdmin):
 
 @admin.register(MainPoint)
 class MainPointAdmin(SummernoteModelAdmin):
-    
     list_display = ['name',]
-
-
-    readonly_fields = ("date_joined", "last_login")
-
     summernote_fields = ("description",)
