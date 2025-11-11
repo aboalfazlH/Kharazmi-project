@@ -36,12 +36,10 @@ class SignUpForm(forms.Form):
     "پژوهش",
 ]
 
-    for name in FIELDS:
-        MainPoint.objects.get_or_create(name=name)
 
 
     main_point = forms.ModelChoiceField(
-        queryset=MainPoint.objects.all(),
+        queryset=MainPoint.objects.none(),
         label="محور مورد نظر",
         empty_label="انتخاب کنید"
     ) 
@@ -97,7 +95,11 @@ class SignUpForm(forms.Form):
         if not email and not phone_number:
             raise forms.ValidationError(_("باید حتما شماره تلفن یا ایمیل داشته باشید"))
         return cleaned_data
-
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for name in self.FIELDS:
+            MainPoint.objects.get_or_create(name=name)
+        self.fields['main_point'].queryset = MainPoint.objects.all()
 
 class LoginForm(forms.Form):
     username = forms.CharField(

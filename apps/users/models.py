@@ -27,6 +27,19 @@ class MainPoint(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+class MiniMainPoint(models.Model):
+
+    name = models.CharField(verbose_name="نام زیر شاخه محور")
+    thumbnail = models.ImageField(verbose_name="تصویر زیر شاخه محور",upload_to=main_point_upload_path,blank=True,null=True)
+    description = models.TextField(verbose_name="توضیحات زیر شاخه محور",blank=True,null=True)
+    main_mainpoint = models.ForeignKey(MainPoint,on_delete=models.CASCADE)
+    class Meta:
+        verbose_name = "محور"
+        verbose_name_plural = "محورها"
+        ordering = ['name']
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class CustomUser(AbstractUser):
