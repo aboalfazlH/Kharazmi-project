@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
-from .models import Post,Course
+from .models import Post
 from .actions import actions
 
 @admin.register(Post)
@@ -38,18 +38,3 @@ class PostAdmin(SummernoteModelAdmin):
         }),
     )
     actions = actions
-
-@admin.register(Course)
-class CourseAdmin(admin.ModelAdmin):
-    list_display = ("name","verbose_name")
-    search_fields = ("name","verbose_name")
-
-    fieldsets = (
-        (None, {
-            'classes':('wide',),
-            'fields': (
-                'name',
-                'verbose_name'
-            ),
-        }),
-    )
