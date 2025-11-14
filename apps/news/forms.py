@@ -12,7 +12,7 @@ class PostCreateForm(forms.ModelForm):
             "title",
             "thumbnail",
             "short_description",
-            "article_course",
+            "post_mainpoint",
             "description",
             "meta_name",
             "meta_description",
