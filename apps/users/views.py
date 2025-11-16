@@ -2,18 +2,43 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import authenticate, login,logout
 from django.views.generic import FormView,View,DetailView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy,reverse
 from django.contrib import messages
 from django.shortcuts import redirect,render
-from .forms import SignUpForm,LoginForm
-from .models import CustomUser
+from .forms import SignUpForm,LoginForm,MainPointForm
+from .models import CustomUser,MainPoint,MiniMainPoint
 from apps.news.models import Post
 
+class SelectMainPointView(FormView):
+    template_name = "select_mainpoint.html"
+    form_class = MainPointForm
+    
+    def form_valid(self, form):
+        main_point_id = form.cleaned_data['main_point'].id
+        signup = reverse("signup")
+        response = redirect(signup)
+        response.set_cookie('selected_main_point', main_point_id, max_age=86400)
+        
+        return response
 
 class SignUpView(FormView):
     template_name = 'signup.html'
     form_class = SignUpForm
     success_url = reverse_lazy('home-page')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        
+        main_point_id = self.request.COOKIES.get('selected_main_point')
+        mainpoint = None
+        if main_point_id:
+            try:
+                mainpoint = MainPoint.objects.get(id=int(main_point_id))
+            except MainPoint.DoesNotExist:
+                mainpoint = None
+        
+        kwargs['mainpoint'] = mainpoint
+        return kwargs
 
     def form_valid(self, form):
         username = form.cleaned_data['username']

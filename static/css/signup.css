@@ -1,0 +1,79 @@
+body {
+    background-image: url('image/images\ \(1\).jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 720px;
+    background-attachment: fixed;
+}
+
+* {
+    cursor: pointer;
+}
+.pes {
+    position: absolute;
+    width: 500px;
+    height: 50px;
+    border: 2px solid black;
+    font-size: 20px;
+    text-align: center;
+    display: block;
+    direction: rtl;
+    border-radius: 10px;
+}
+.category-select {
+    width: 505px;
+    margin: 10px 35%;
+}
+
+.pes1 {
+    margin: 100px 35%;
+}
+.pes2 {
+    margin: 200px 35%;
+}
+.pes3 {
+    margin: 300px 35%;
+}
+.pes4 {
+    margin: 400px 35%;
+}
+.pes5 {
+    margin: 500px 35%;
+}
+.pes6 {
+    margin: 500px 35%;
+}
+.pes7 {
+    margin: 600px 35%;
+}
+.pes8 {
+    margin: 700px 35%;
+}
+
+
+.ped {
+    position: absolute;
+    margin: 800px 45%;
+    width: 250px;
+    height: 50px;
+    border: 2px solid black;
+    font-size: 20px;
+    color: blue;
+    display: block;
+    font-weight: 900;
+    border-radius: 10px;
+    font-size: 30px;
+}
+
+.ped123 {
+    font-size: 50px;
+    color: red;
+    position: absolute;
+    top: 535px;
+    left: 900px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+    border: 2px solid blue;
+    background-color: rgb(96, 96, 255);
+}

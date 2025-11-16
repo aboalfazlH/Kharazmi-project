@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django_summernote.admin import SummernoteModelAdmin
-from .models import CustomUser,MainPoint
+from .models import CustomUser,MainPoint,MiniMainPoint
 from .forms import CustomUserChangeForm, CustomUserCreationForm
 
 
@@ -54,3 +54,4 @@ class CustomUserAdmin(UserAdmin, SummernoteModelAdmin):
 class MainPointAdmin(SummernoteModelAdmin):
     list_display = ['name',]
     summernote_fields = ("description",)
+admin.site.register(MiniMainPoint)

@@ -1,0 +1,6 @@
+<h1>لطفا ابتدا محور مد نظر را انتخاب کنید</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">انتخاب محور</button>
+</form>

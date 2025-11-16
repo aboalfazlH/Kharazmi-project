@@ -34,8 +34,8 @@ class MiniMainPoint(models.Model):
     description = models.TextField(verbose_name="توضیحات زیر شاخه محور",blank=True,null=True)
     main_mainpoint = models.ForeignKey(MainPoint,on_delete=models.CASCADE)
     class Meta:
-        verbose_name = "محور"
-        verbose_name_plural = "محورها"
+        verbose_name = "زیر محور"
+        verbose_name_plural = "زیر محورها"
         ordering = ['name']
 
     def __str__(self):

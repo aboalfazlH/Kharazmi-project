@@ -1,6 +1,6 @@
 from django.core.validators import RegexValidator
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import CustomUser,MainPoint
+from .models import CustomUser,MainPoint,MiniMainPoint
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
@@ -18,9 +18,8 @@ class CustomUserChangeForm(UserChangeForm):
     class meta:
         fields = "__all__"
 
-
-class SignUpForm(forms.Form):
-    FIELDS = FIELDS = [
+class MainPointForm(forms.Form):
+    FIELDS = [
     "بازارچه کسب و کار دانش آموزش",
     "بازی های مهارتی و توسعه فردی",
     "برنامه نویسی",
@@ -35,52 +34,72 @@ class SignUpForm(forms.Form):
     "مطالعات اجتماعی",
     "پژوهش",
 ]
-
-
-
     main_point = forms.ModelChoiceField(
         queryset=MainPoint.objects.none(),
-        label="محور مورد نظر",
-        empty_label="انتخاب کنید"
-    ) 
+        label="",
+        empty_label="انتخاب محور",
+        widget=forms.Select(attrs={
+            "class": "pes category-select",
+        })
+    )
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for name in self.FIELDS:
+            MainPoint.objects.get_or_create(name=name)
+        self.fields['main_point'].queryset = MainPoint.objects.all()
+
+class SignUpForm(forms.Form):
+    mini_mainpoint = forms.ModelChoiceField(
+        queryset=MiniMainPoint.objects.none(),
+        label="",
+        required=False,
+        widget=forms.Select(attrs={
+            "class": "pes category-select",
+        })
+    )
     username = forms.CharField(
-        label=_("نام کاربری"),
+        label='',
         max_length=110,
         validators=[RegexValidator(r"^[\w.@+-]+$")],
-        widget=forms.TextInput(attrs={"placeholder": _("نام کاربری")}),
+        widget=forms.TextInput(attrs={"placeholder": _("نام کاربری"),"class":"pes pes1"}),
     )
     first_name = forms.CharField(
         max_length=50,
-        widget=forms.TextInput(attrs={"placeholder": _("نام")}),
+        widget=forms.TextInput(attrs={"placeholder": _("نام"),"class":"pes pes2"}),
         required=False,
-        label=_("نام"),
+        label='',
     )
     last_name = forms.CharField(
         max_length=50,
-        widget=forms.TextInput(attrs={"placeholder": _("نام خانوادگی")}),
+        widget=forms.TextInput(attrs={"placeholder": _("نام خانوادگی"),"class":"pes pes3"}),
         required=False,
-        label=_("نام خانوادگی"),
+        label='',
     )
     email = forms.EmailField(
-        widget=forms.EmailInput(attrs={"placeholder": _("ایمیل")}),
+        widget=forms.EmailInput(attrs={"placeholder": _("ایمیل"),"class":"pes pes4"}),
         required=False,
-        label=_("ایمیل"),
+        label='',
     )
     phone_number = forms.CharField(
         max_length=15,
         validators=[RegexValidator(r"^\+?\d{10,15}$")],
-        widget=forms.TextInput(attrs={"placeholder": _("شماره تلفن")}),
+        widget=forms.TextInput(attrs={"placeholder": _("شماره تلفن"),"class":"pes pes6"}),
         required=False,
-        label=_("شماره تلفن"),
+        label='',
     )
     password = forms.CharField(
-        label=_("گذرواژه"),
-        widget=forms.PasswordInput(attrs={"placeholder": _("گذرواژه")}),
+        label='',
+        widget=forms.PasswordInput(attrs={"placeholder": _("گذرواژه"),"class":"pes pes7"}),
     )
     password_confirm = forms.CharField(
-        label=_("تائید گذرواژه"),
-        widget=forms.PasswordInput(attrs={"placeholder": _("تایید گذرواژه")}),
+        label='',
+        widget=forms.PasswordInput(attrs={"placeholder": _("تایید گذرواژه",),"class":"pes pes8"}),
     )
+    def __init__(self, *args, **kwargs):
+        main_point = kwargs.pop('mainpoint', None)
+        super().__init__(*args, **kwargs)
+        if main_point:
+            self.fields['mini_mainpoint'].queryset = MiniMainPoint.objects.filter(main_mainpoint=main_point)
 
     def clean(self):
         cleaned_data = super().clean()
@@ -95,11 +114,6 @@ class SignUpForm(forms.Form):
         if not email and not phone_number:
             raise forms.ValidationError(_("باید حتما شماره تلفن یا ایمیل داشته باشید"))
         return cleaned_data
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for name in self.FIELDS:
-            MainPoint.objects.get_or_create(name=name)
-        self.fields['main_point'].queryset = MainPoint.objects.all()
 
 class LoginForm(forms.Form):
     username = forms.CharField(
