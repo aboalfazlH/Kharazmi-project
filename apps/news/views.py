@@ -42,25 +42,31 @@ class PostCreateView(LoginRequiredMixin,CreateView):
     success_url = reverse_lazy('blog-page')
 
     def form_valid(self, form):
+        request = self.request
+        user = request.user
+        staff_user = user.is_staff
         post = form.save(commit=False)
         post.author = self.request.user
         post.is_active = False
         post.is_verify = False
         post.is_pin = False
 
-        posts = Post.objects.filter(author=self.request.user)
+        posts = Post.objects.filter(author=user)
         if posts.count() > 10:
             post.is_active = True
 
         one_day_ago = timezone.now() - timedelta(days=1)
-        posts_today = Post.objects.filter(author=self.request.user, write_date__gte=one_day_ago)
+        posts_today = Post.objects.filter(author=user, write_date__gte=one_day_ago)
         
-        if posts_today.count() > 10 and not self.request.user.is_staff:
-            messages.warning(self.request,"شما بیش از 10 مقاله نوشتید!")
+        if posts_today.count() > 10 and not user.is_staff:
+            messages.warning(request,"شما بیش از 10 خبر نوشتید!")
             return redirect("home-page")
+        if staff_user:
+            post.is_pin = True
+        post.is_active = True
 
         post.save()
-        messages.success(self.request, "مقاله شما ثبت شد.")
+        messages.success(request, "مقاله شما ثبت شد.")
         return redirect(self.success_url)
 
     def form_invalid(self, form):
