@@ -8,7 +8,6 @@ urlpatterns = [
     path('', include('apps.core.urls')),
     path('news/', include('apps.news.urls')),
     path('users/', include('apps.users.urls')),
-    path('question-answer/', include('apps.qa.urls')),
     path('summernote/', include('django_summernote.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

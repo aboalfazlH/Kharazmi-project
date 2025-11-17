@@ -31,14 +31,12 @@ SILENCED_SYSTEM_CHECKS = ["security.W019"]
 
 THIRD_PARTY_APPS = [
     "django_summernote",
-    "dynamic_forms"
 ]
 
 LOCAL_APPS = [
     "apps.core",
     "apps.users",
     "apps.news",
-    "apps.qa"
 ]
 
 
