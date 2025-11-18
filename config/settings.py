@@ -3,7 +3,7 @@ from os import getenv
 from dotenv import load_dotenv
 from pathlib import Path
 
-
+# load secret key,debug mode and allowed hosts
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,7 +16,7 @@ DEBUG = getenv("DEBUG", "False").lower() in ("true", "1", "yes")
 ALLOWED_HOSTS =  getenv("ALLOWED_HOSTS", "").split(",")
 
 DJANGO_APPS = [
-    "admin_interface", 
+    "admin_interface", # admin better design
     "colorfield",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -26,11 +26,12 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
-X_FRAME_OPTIONS = "SAMEORIGIN"
+# admin interface
+X_FRAME_OPTIONS = "SAMEORIGIN" 
 SILENCED_SYSTEM_CHECKS = ["security.W019"]
 
 THIRD_PARTY_APPS = [
-    "django_summernote",
+    "django_summernote", # editor
 ]
 
 LOCAL_APPS = [
@@ -100,10 +101,6 @@ LANGUAGE_CODE = 'fa-IR'
 USE_I18N = True  
 USE_L10N = True
 USE_TZ = True
-LANGUAGES = [
-    ('en', 'English'),
-    ('fa', 'Farsi'),
-]
 LOCALE_PATHS = [
     joinpath(BASE_DIR, 'locale'),
 ]
