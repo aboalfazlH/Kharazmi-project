@@ -1,6 +1,6 @@
 # Kharazmi Project | پروژه جشنواره خوارزمی
 
-Project for the Kharazmi Festival, a blog for writing posts for lessons and questions and answers to solve lesson problems
+Project for the Kharazmi Festival, a blog for writing posts for lessons
 
 ## Features
 
