@@ -10,7 +10,7 @@ Project for the Kharazmi Festival, a blog for writing posts for lessons
   
 ## Tech Stack
 
-- **Backend**: Python Django
+- **Backend**: Python, Django
 - **Database**: SQLite 
 - **Frontend**: HTML, CSS, JavaScript
 
