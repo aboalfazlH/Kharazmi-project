@@ -11,15 +11,8 @@
 
 <body>
 
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li class="message {{ message.tags }}">{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-
-    {% block content %}
+{% include "components/messages.html" %}
+{% block content %}
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
