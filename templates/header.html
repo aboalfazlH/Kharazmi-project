@@ -1,29 +1,25 @@
-<header>
-    <nav class="navbar">
-        <div class="">
-            <ul class="">
-                <li><a class="" href="{% url 'home-page' %}">صفحه اصلی</a></li>
-                <li><a class="" href="{% url 'blog-page' %}">بلاگ</a></li>
+    <header class="head">
+        <nav class="navbar">
+            <ul class="links">
+                <span class="head-title">
+                    {% if user.is_authenticated %}
+                    فرهنگسرای نواندیشان
+                    {% else %}
+                    جشنواره خوارزمی
+                    {% endif %}
+                </span>
+                <li class="link"><a href="{% url 'home-page' %}" class="link-text">صفحه اصلی</a></li>
+                <li class="link"><a href="{% url 'blog-page' %}" class="link-text">وبلاگ</a></li>
+                {% comment %} <li class="link"><a href="" class="link-text">درباره ما</a></li> {% endcomment %}
+                {% comment %} <li class="link"><a href="#" class="link-text">پشتیبانی</a></li> {% endcomment %}
+                {% comment %} <li class="link"><a href="#" class="link-text">خدمات</a></li> {% endcomment %}
                 <form method="GET" action="{% url 'global-search' %}">
+                    <input type="submit" value="&#x1F50D;">
                     <input type="text" name="query" placeholder="جستجو...">
-                    <button type="submit">جستجو</button>
                 </form>
-
-                {% if user.is_authenticated %}
-                <li><a class="" href="{% url 'my-profile' %}">{{ user }}</a></li>
-
-                {% if user.is_staff %}
-                <li><a class="" href="{% url 'admin:index' %}">داشبورد</a></li>
-                {% endif %}
-                <form action="{% url 'logout' %}" method="post">
-                    {% csrf_token %}
-                    <button class="" type="submit">خروج</button>
                 </form>
-                {% else %}
-                <li><a href="{% url 'signup' %}">ثبت نام</a></li>
-                <li><a href="{% url 'login' %}">ورود</a></li>
-                {% endif %}
+                <li class="auth login link"><a href="{% url 'login' %}" class="auth-text link-text">ورود</a></li>
+                <li class="auth link"><a href="{% url 'signup' %}" class="auth-text link-text">ثبت نام</a></li>
             </ul>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>

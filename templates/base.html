@@ -16,12 +16,16 @@
     {% endblock meta %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if user.is_authenticated %}فرهنگسرای نو اندیشان{% else %} جشنواره خوارزمی {% endif %} | {% block title %}{% endblock title %}</title>
+    <title>
+    {% if user.is_authenticated %}
+    فرهنگسرای نو اندیشان
+    {% else %}
+     جشنواره خوارزمی 
+     {% endif %} | 
+     {% block title %}{% endblock title %}
+     </title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% block styles %}
-    <style>
-        
-    </style>
     {% endblock styles %}
 
 </head>
@@ -30,7 +34,7 @@
     <header>{% include 'header.html' %}</header>
     {% include "components/messages.html" %}
 
-    <main>
+    <main class="content">
         {% block content %}
         {% endblock content %}
     </main>
